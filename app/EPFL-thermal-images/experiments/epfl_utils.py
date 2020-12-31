@@ -1,3 +1,11 @@
+from augmentations import (
+    train_common_transform,
+    test_common_transform,
+    rgb_transform,
+    infrared_transform,
+)
+from dataset import ImageClassificationDataset
+from datamodule import ImageClassificationDatamodule
 import sys
 from os.path import abspath, relpath, dirname, join
 
@@ -6,26 +14,27 @@ image_segmentation_module_path = abspath(
 )
 sys.path.append(image_segmentation_module_path)
 
-from datamodule import ImageClassificationDatamodule
-from dataset import ImageClassificationDataset
 
 experiment_utils_module_path = abspath(
     join(dirname(relpath(__file__)), "..", "..", "experiments_utils")
 )
 sys.path.append(experiment_utils_module_path)
 
-from augmentations import (
-    train_common_transform,
-    test_common_transform,
-    rgb_transform,
-    infrared_transform,
-)
-
 
 PROJECT_NAME = "EPFL_RGB_NIR"
 
-train_df_json_path = abspath(join(dirname(relpath(__file__)), "..", "train.json"))
-test_df_json_path = abspath(join(dirname(relpath(__file__)), "..", "test.json"))
+train_df_json_path = abspath(
+    join(
+        dirname(
+            relpath(__file__)),
+        "..",
+        "train.json"))
+test_df_json_path = abspath(
+    join(
+        dirname(
+            relpath(__file__)),
+        "..",
+        "test.json"))
 
 train_common_transform = train_common_transform
 test_common_transform = test_common_transform

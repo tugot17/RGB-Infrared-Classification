@@ -1,16 +1,15 @@
+from torch import nn, cat
+from base_model import ImageClassificationLightningModule
+from typing import Callable
 import sys
 from os.path import join, relpath, dirname
 
 upper_dir = join(dirname(relpath(__file__)), "..")
 sys.path.append(upper_dir)
 
-from typing import Callable
 
-from base_model import ImageClassificationLightningModule
-from torch import nn, cat
-
-
-class EfficientNetLightningModuleWithTwoBackbones(ImageClassificationLightningModule):
+class EfficientNetLightningModuleWithTwoBackbones(
+        ImageClassificationLightningModule):
     def __init__(
         self,
         backbone_rgb: nn.Module,
