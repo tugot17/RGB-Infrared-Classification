@@ -38,13 +38,13 @@ class ImageClassificationDataset(Dataset):
         transformed = self.common_transform(
             image=original_rgb_img, infrared_img=original_infrared_img
         )
-        rgb_img = transformed["image"]
-        infrared_img = transformed["infrared_img"]
+        original_rgb_img = transformed["image"]
+        original_infrared_img = transformed["infrared_img"]
 
-        transformed = self.rgb_transform(image=rgb_img)
+        transformed = self.rgb_transform(image=original_rgb_img)
         rgb_img = transformed["image"]
 
-        transformed = self.infrared_transform(image=infrared_img)
+        transformed = self.infrared_transform(image=original_infrared_img)
         infrared_img = transformed["image"]
 
         combined_img = torch.cat((rgb_img, infrared_img), 0)
