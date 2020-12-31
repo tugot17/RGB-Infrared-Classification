@@ -25,9 +25,11 @@ class ImageClassificationLightningModule(pl.LightningModule):
         self.num_classes = num_classes
 
         self.get_x_method = get_x_method
+        
+        self.activation = nn.LogSoftmax(dim=1)
 
     def forward(self, x):
-        return self.backbone(x)
+        return self.activation(self.backbone(x))
 
     def configure_optimizers(self):
         optimizer = Adam(self.parameters(), self.lr)

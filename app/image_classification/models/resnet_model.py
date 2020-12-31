@@ -1,14 +1,16 @@
-from torch import nn
-from base_model import ImageClassificationLightningModule
-from typing import Callable
 import sys
 from os.path import join, relpath, dirname
 
 upper_dir = join(dirname(relpath(__file__)), "..")
 sys.path.append(upper_dir)
 
+from torch import nn
+from base_model import ImageClassificationLightningModule
+from typing import Callable
 
-class ImageClassificationLightningModule(ImageClassificationLightningModule):
+
+
+class ResnetImageClassificationLightningModule(ImageClassificationLightningModule):
     lr = 1e-3
 
     def __init__(
@@ -52,7 +54,6 @@ class ImageClassificationLightningModule(ImageClassificationLightningModule):
         backbone.fc = nn.Sequential(
             nn.Linear(
                 num_ftrs,
-                num_classes),
-            nn.Softmax2d())
+                num_classes))
 
         return backbone

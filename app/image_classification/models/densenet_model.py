@@ -8,7 +8,7 @@ upper_dir = join(dirname(relpath(__file__)), "..")
 sys.path.append(upper_dir)
 
 
-class ImageClassificationLightningModule(ImageClassificationLightningModule):
+class DensenetImageClassificationLightningModule(ImageClassificationLightningModule):
     lr = 1e-3
 
     def __init__(
@@ -48,8 +48,6 @@ class ImageClassificationLightningModule(ImageClassificationLightningModule):
 
         num_ftrs = backbone.classifier.in_features
 
-        backbone.classifier = nn.Sequential(
-            nn.Linear(num_ftrs, num_classes), nn.Softmax2d()
-        )
+        backbone.classifier = nn.Sequential(nn.Linear(num_ftrs, num_classes))
 
         return backbone
