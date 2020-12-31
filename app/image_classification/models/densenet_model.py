@@ -1,12 +1,11 @@
+from torch import nn
+from base_model import ImageClassificationLightningModule
+from typing import Callable
 import sys
 from os.path import join, relpath, dirname
 
 upper_dir = join(dirname(relpath(__file__)), "..")
 sys.path.append(upper_dir)
-
-from typing import Callable
-from base_model import ImageClassificationLightningModule
-from torch import nn
 
 
 class ImageClassificationLightningModule(ImageClassificationLightningModule):
