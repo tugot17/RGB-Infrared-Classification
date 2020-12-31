@@ -17,7 +17,8 @@ def predict(model, dataloader, device, get_x_method):
 
         batch_size = dataloader.batch_size
 
-        predictions = torch.zeros(num_elements, *dataloader.dataset[0]["mask"].size())
+        predictions = torch.zeros(
+            num_elements, *dataloader.dataset[0]["mask"].size())
 
         for i, batch in enumerate(dataloader):
             start = i * batch_size

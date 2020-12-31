@@ -37,7 +37,11 @@ def run_experiment(lightning_model, datamodule, seed, get_x_method, logger):
     trainer.fit(lightning_model, datamodule)
     lightning_model.eval()
 
-    preds = predict(lightning_model, datamodule.val_dataloader(), "cuda", get_x_method)
+    preds = predict(
+        lightning_model,
+        datamodule.val_dataloader(),
+        "cuda",
+        get_x_method)
 
     lightning_model = lightning_model.cpu()
 

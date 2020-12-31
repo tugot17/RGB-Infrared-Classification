@@ -48,8 +48,10 @@ def generate_train_test_dataframes_for_epfl_dataset(root_dir):
     train_df.to_json(save_path_train)
     val_df.to_json(save_path_val)
 
-    print(f"Saved train dataset in {save_path_train} with {len(train_df)} annotations")
-    print(f"Saved val dataset in {save_path_val} with {len(val_df)} annotations")
+    print(
+        f"Saved train dataset in {save_path_train} with {len(train_df)} annotations")
+    print(
+        f"Saved val dataset in {save_path_val} with {len(val_df)} annotations")
 
 
 if __name__ == "__main__":
