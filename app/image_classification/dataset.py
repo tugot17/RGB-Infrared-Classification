@@ -50,8 +50,8 @@ class ImageClassificationDataset(Dataset):
         combined_img = torch.cat((rgb_img, infrared_img), 0)
         infrared_img = infrared_img.repeat(3, 1, 1)
 
-        label = self.labels[idx]
-        label = self.label_map[label]
+        original_label = self.labels[idx]
+        label = self.label_map[original_label]
 
         item_dict = {
             "original_rgb_img": original_rgb_img,
@@ -59,6 +59,7 @@ class ImageClassificationDataset(Dataset):
             "rgb_img": rgb_img,
             "infrared_img": infrared_img,
             "combined_img": combined_img,
+            "original_label": original_label,
             "label": label,
         }
 
