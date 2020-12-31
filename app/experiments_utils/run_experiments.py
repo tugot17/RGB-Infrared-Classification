@@ -1,7 +1,21 @@
-from model_with_two_separate_backbones import (
-    ImageSegmentationLightningModuleWithTwoBackbones,
+import sys
+from os.path import abspath, relpath, dirname, join
+
+image_segmentation_module_path = abspath(
+    join(dirname(relpath(__file__)), "..", "image_classification")
 )
-from model import ImageSegmentationLightningModule
+sys.path.append(image_segmentation_module_path)
+
+from models.densenet_model import DensenetImageClassificationLightningModule
+from models.efficientnet_model import EfficientnetImageClassificationLightningModule
+from models.resnet_model import ResnetImageClassificationLightningModule
+
+
+from models_with_two_separate_backbones.densnet_with_two_separate_backbones import DenseLightningModuleWithTwoBackbones
+from models_with_two_separate_backbones.efficientnet_with_two_separate_backbones import EfficientNetLightningModuleWithTwoBackbones
+from models_with_two_separate_backbones.resnet_with_two_separate_backbones import ResnetLightningModuleWithTwoBackbones
+
+
 import torch
 import wandb
 from pytorch_lightning import Trainer, seed_everything
@@ -9,19 +23,11 @@ from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 from pytorch_lightning.loggers import WandbLogger
 from predict import predict
 
-import sys
-from os.path import abspath, relpath, dirname, join
 
-image_segmentation_module_path = abspath(
-    join(dirname(relpath(__file__)), "..", "image_segmentation")
-)
-sys.path.append(image_segmentation_module_path)
+MAX_EPOCHS = 30
 
 
-MAX_EPOCHS = 1
-
-
-def run_experiment(lightning_model, datamodule, seed, get_x_method, logger):
+def run_experiment(lightning_model, datamodule, seed, get_x_method, logger, num_classes):
     seed_everything(seed)
 
     trainer = Trainer(
@@ -41,7 +47,8 @@ def run_experiment(lightning_model, datamodule, seed, get_x_method, logger):
         lightning_model,
         datamodule.val_dataloader(),
         "cuda",
-        get_x_method)
+        get_x_method,
+        num_classes)
 
     lightning_model = lightning_model.cpu()
 
@@ -49,12 +56,14 @@ def run_experiment(lightning_model, datamodule, seed, get_x_method, logger):
 
     return preds
 
-
 def run_experiments_for_models(
+    model_init_fun,
     models_configurations,
     dm,
     seeds,
     get_x_method,
+    num_classes,
+    in_channels,
     store_preds_path,
     project_name,
     experiment_type,
@@ -70,10 +79,9 @@ def run_experiments_for_models(
                 name=experiment_type_plus_model_name, project=project_name
             )
 
-            backbone = backbone_fun(**kwargs)
-            model = ImageSegmentationLightningModule(backbone, get_x_method)
+            model = model_init_fun(backbone_fun, kwargs, get_x_method, num_classes, in_channels)
 
-            preds = run_experiment(model, dm, seed, get_x_method, logger)
+            preds = run_experiment(model, dm, seed, get_x_method, logger, num_classes)
             predictions_for_seeds.append(preds)
 
         save_preds_path = join(store_preds_path, f"{model_name}.pt")
@@ -84,11 +92,14 @@ def run_experiments_for_models(
         )
 
 
+
 def run_experiments_for_models_with_two_separate_backbones(
+    model_init_fun,
     models_configurations,
     dm,
     seeds,
     get_x_method,
+    num_classes,
     store_preds_path,
     project_name,
     experiment_type,
@@ -107,8 +118,8 @@ def run_experiments_for_models_with_two_separate_backbones(
             backbone_rgb = backbone_fun(**kwargs)
             backbone_infrared = backbone_fun(**kwargs)
 
-            model = ImageSegmentationLightningModuleWithTwoBackbones(
-                backbone_rgb, backbone_infrared, get_x_method
+            model = model_init_fun(
+                backbone_rgb, backbone_infrared, get_x_method, num_classes
             )
 
             preds = run_experiment(model, dm, seed, get_x_method, logger)

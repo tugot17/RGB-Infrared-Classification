@@ -23,7 +23,7 @@ class EfficientNetLightningModuleWithTwoBackbones(
         self.classifier = nn.Sequential(
             nn.ReLU(),
             nn.Linear(2 * num_output_nodes, num_classes),
-            nn.Softmax2d(),
+            self.activation,
         )
 
         self.backbone_rgb = backbone_rgb

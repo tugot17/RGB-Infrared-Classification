@@ -5,9 +5,6 @@ from typing import Callable
 import sys
 from os.path import join, relpath, dirname
 
-upper_dir = join(dirname(relpath(__file__)), "..")
-sys.path.append(upper_dir)
-
 
 class EfficientnetImageClassificationLightningModule(ImageClassificationLightningModule):
     lr = 1e-3
@@ -19,6 +16,7 @@ class EfficientnetImageClassificationLightningModule(ImageClassificationLightnin
             get_x_method: Callable,
             num_classes, 
             in_channels=3,):
+
         kwargs["num_classes"] = num_classes
         kwargs["in_channels"] = in_channels
         backbone = self._initialize_backbone(backbone_fun, kwargs)
