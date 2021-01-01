@@ -32,7 +32,7 @@ project_name = PROJECT_NAME
 experiment_type = "rgb_only"
 
 num_classes = 9
-in_channels = 3
+in_channels = 4
 
 
 def get_x_method(batch):
