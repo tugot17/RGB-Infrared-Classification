@@ -39,15 +39,15 @@ class ResnetImageClassificationLightningModule(ImageClassificationLightningModul
         backbone = backbone_fun(**kwargs)
 
         if in_channels != 3:
-            weight = self.backbone.conv1.weight.data.clone()
+            weight = backbone.conv1.weight.data.clone()
 
-            self.backbone.conv1 = nn.Conv2d(
+            backbone.conv1 = nn.Conv2d(
                 in_channels, 64, kernel_size=7, stride=2, padding=3, bias=False
             )
 
             if first_layer_pretrained:
-                self.backbone.conv1.weight.data[:, :3] = weight
-                self.backbone.conv1.weight.data[:, 3] = weight.mean(dim=1)
+                backbone.conv1.weight.data[:, :3] = weight
+                backbone.conv1.weight.data[:, 3] = weight.mean(dim=1)
 
         num_ftrs = backbone.fc.in_features
 
