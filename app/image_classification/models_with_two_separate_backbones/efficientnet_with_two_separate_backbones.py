@@ -8,8 +8,7 @@ upper_dir = join(dirname(relpath(__file__)), "..")
 sys.path.append(upper_dir)
 
 
-class EfficientNetLightningModuleWithTwoBackbones(
-        ImageClassificationLightningModule):
+class EfficientNetLightningModuleWithTwoBackbones(ImageClassificationLightningModule):
     def __init__(
         self,
         backbone_rgb: nn.Module,

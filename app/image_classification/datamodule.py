@@ -15,14 +15,10 @@ class ImageClassificationDatamodule(pl.LightningDataModule):
 
     def train_dataloader(self):
         return DataLoader(
-            self.train_set,
-            batch_size=self.batch_size,
-            shuffle=True,
-            num_workers=4)
+            self.train_set, batch_size=self.batch_size, shuffle=True, num_workers=4
+        )
 
     def val_dataloader(self):
         return DataLoader(
-            self.val_set,
-            batch_size=self.batch_size,
-            shuffle=False,
-            num_workers=4)
+            self.val_set, batch_size=self.batch_size, shuffle=False, num_workers=4
+        )

@@ -6,16 +6,6 @@ image_segmentation_module_path = abspath(
 )
 sys.path.append(image_segmentation_module_path)
 
-from models.densenet_model import DensenetImageClassificationLightningModule
-from models.efficientnet_model import EfficientnetImageClassificationLightningModule
-from models.resnet_model import ResnetImageClassificationLightningModule
-
-
-from models_with_two_separate_backbones.densnet_with_two_separate_backbones import DenseLightningModuleWithTwoBackbones
-from models_with_two_separate_backbones.efficientnet_with_two_separate_backbones import EfficientNetLightningModuleWithTwoBackbones
-from models_with_two_separate_backbones.resnet_with_two_separate_backbones import ResnetLightningModuleWithTwoBackbones
-
-
 import torch
 import wandb
 from pytorch_lightning import Trainer, seed_everything
@@ -27,7 +17,9 @@ from predict import predict
 MAX_EPOCHS = 30
 
 
-def run_experiment(lightning_model, datamodule, seed, get_x_method, logger, num_classes):
+def run_experiment(
+    lightning_model, datamodule, seed, get_x_method, logger, num_classes
+):
     seed_everything(seed)
 
     trainer = Trainer(
@@ -44,17 +36,15 @@ def run_experiment(lightning_model, datamodule, seed, get_x_method, logger, num_
     lightning_model.eval()
 
     preds = predict(
-        lightning_model,
-        datamodule.val_dataloader(),
-        "cuda",
-        get_x_method,
-        num_classes)
+        lightning_model, datamodule.val_dataloader(), "cuda", get_x_method, num_classes
+    )
 
     lightning_model = lightning_model.cpu()
 
     wandb.finish()
 
     return preds
+
 
 def run_experiments_for_models(
     model_init_fun,
@@ -79,7 +69,9 @@ def run_experiments_for_models(
                 name=experiment_type_plus_model_name, project=project_name
             )
 
-            model = model_init_fun(backbone_fun, kwargs, get_x_method, num_classes, in_channels)
+            model = model_init_fun(
+                backbone_fun, kwargs, get_x_method, num_classes, in_channels
+            )
 
             preds = run_experiment(model, dm, seed, get_x_method, logger, num_classes)
             predictions_for_seeds.append(preds)
@@ -90,7 +82,6 @@ def run_experiments_for_models(
             torch.stack(predictions_for_seeds).mean(dim=0).type(torch.float16),
             save_preds_path,
         )
-
 
 
 def run_experiments_for_models_with_two_separate_backbones(

@@ -44,9 +44,6 @@ class ResnetImageClassificationLightningModule(ImageClassificationLightningModul
 
         num_ftrs = backbone.fc.in_features
 
-        backbone.fc = nn.Sequential(
-            nn.Linear(
-                num_ftrs,
-                num_classes))
+        backbone.fc = nn.Sequential(nn.Linear(num_ftrs, num_classes))
 
         return backbone

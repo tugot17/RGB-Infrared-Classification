@@ -23,18 +23,8 @@ from datamodule import ImageClassificationDatamodule
 
 PROJECT_NAME = "EPFL_RGB_NIR"
 
-train_df_json_path = abspath(
-    join(
-        dirname(
-            relpath(__file__)),
-        "..",
-        "train.json"))
-val_df_json_path = abspath(
-    join(
-        dirname(
-            relpath(__file__)),
-        "..",
-        "val.json"))
+train_df_json_path = abspath(join(dirname(relpath(__file__)), "..", "train.json"))
+val_df_json_path = abspath(join(dirname(relpath(__file__)), "..", "val.json"))
 
 train_common_transform = train_common_transform
 test_common_transform = test_common_transform

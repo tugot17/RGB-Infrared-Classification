@@ -8,8 +8,7 @@ upper_dir = join(dirname(relpath(__file__)), "..")
 sys.path.append(upper_dir)
 
 
-class ResnetLightningModuleWithTwoBackbones(
-        ImageClassificationLightningModule):
+class ResnetLightningModuleWithTwoBackbones(ImageClassificationLightningModule):
     def __init__(
         self,
         backbone_rgb: nn.Module,
@@ -28,8 +27,7 @@ class ResnetLightningModuleWithTwoBackbones(
         )
 
         self.backbone_rgb = nn.Sequential(*list(backbone_rgb.children())[:-1])
-        self.backbone_infrared = nn.Sequential(
-            *list(backbone_infrared.children())[:-1])
+        self.backbone_infrared = nn.Sequential(*list(backbone_infrared.children())[:-1])
 
     def forward(self, x):
         rgb_batch, infrared_batch = x

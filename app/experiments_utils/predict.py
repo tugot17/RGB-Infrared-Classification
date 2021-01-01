@@ -1,5 +1,6 @@
 import torch
 
+
 @torch.no_grad()
 def predict(model, dataloader, device, get_x_method, num_classes):
     """

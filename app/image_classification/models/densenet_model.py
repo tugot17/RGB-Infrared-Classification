@@ -4,6 +4,7 @@ from typing import Callable
 import sys
 from os.path import join, relpath, dirname
 
+
 class DensenetImageClassificationLightningModule(ImageClassificationLightningModule):
     lr = 1e-3
 
