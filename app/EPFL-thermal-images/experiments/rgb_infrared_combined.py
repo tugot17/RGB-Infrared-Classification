@@ -25,7 +25,7 @@ from seeds import seeds
 from epfl_utils import PROJECT_NAME, datamodule
 
 store_preds_path = abspath(
-    join(dirname(relpath(__file__)), "..", "results", "combined_img")
+    join(dirname(relpath(__file__)), "..", "results", "rgb_infrared_combined")
 )
 
 project_name = PROJECT_NAME
