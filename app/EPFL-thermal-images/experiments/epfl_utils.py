@@ -21,7 +21,8 @@ from dataset import ImageClassificationDataset
 from datamodule import ImageClassificationDatamodule
 
 
-PROJECT_NAME = "EPFL_RGB_NIR"
+# PROJECT_NAME = "EPFL_RGB_NIR"
+PROJECT_NAME = "EPFL_RGB_NIR_TEST"
 
 train_df_json_path = abspath(join(dirname(relpath(__file__)), "..", "train.json"))
 val_df_json_path = abspath(join(dirname(relpath(__file__)), "..", "val.json"))
