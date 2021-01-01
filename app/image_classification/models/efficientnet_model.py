@@ -1,9 +1,13 @@
+import sys
+from os.path import abspath, relpath, dirname, join
+
+upper_dir = abspath(join(dirname(relpath(__file__)), ".."))
+
+sys.path.append(upper_dir)
+
 from efficientnet_pytorch.utils import Conv2dStaticSamePadding
-from torch import nn
 from base_model import ImageClassificationLightningModule
 from typing import Callable
-import sys
-from os.path import join, relpath, dirname
 
 
 class EfficientnetImageClassificationLightningModule(
