@@ -65,7 +65,7 @@ def main(sat_4_full_mat_path, images_save_dir_path):
         data = {"rgb": rgb_img_paths, "infrared": nir_img_paths, "label": labels}
         df = pd.DataFrame(data=data)
 
-        json_dataframe_path = abspath(join(dirname(relpath(__file__)), f"train.json"))
+        json_dataframe_path = abspath(join(dirname(relpath(__file__)), f"{stage}.json"))
         df.to_json(json_dataframe_path)
 
         print(
