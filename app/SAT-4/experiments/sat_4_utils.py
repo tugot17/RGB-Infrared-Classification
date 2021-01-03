@@ -32,17 +32,7 @@ test_common_transform = test_common_transform
 rgb_transform = rgb_transform
 infrared_transform = infrared_transform
 
-label_map = {
-    "forest": 0,
-    "indoor": 1,
-    "street": 2,
-    "field": 3,
-    "country": 4,
-    "urban": 5,
-    "mountain": 6,
-    "oldbuilding": 7,
-    "water": 8,
-}
+label_map = {"barren land": 0, "trees": 1, "grassland": 2, "none": 3}
 
 
 train_set = ImageClassificationDataset(
