@@ -1,3 +1,4 @@
 tqdm==4.50.2
 black==20.8b1
 efficientnet-pytorch==0.7.0
+opencv-python==4.5.1.48

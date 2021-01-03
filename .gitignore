@@ -131,3 +131,4 @@ dmypy.json
 /app/EPFL-thermal-images/results/
 /app/EPFL-thermal-images/train.json
 /app/EPFL-thermal-images/val.json
+/data/SAT_4/
