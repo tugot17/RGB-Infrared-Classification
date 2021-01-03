@@ -17,9 +17,15 @@ image_classification_module_path = abspath(
 )
 sys.path.append(image_classification_module_path)
 
-from models_with_two_separate_backbones.densnet_with_two_separate_backbones import DenseLightningModuleWithTwoBackbones
-from models_with_two_separate_backbones.efficientnet_with_two_separate_backbones import EfficientNetLightningModuleWithTwoBackbones
-from models_with_two_separate_backbones.resnet_with_two_separate_backbones import ResnetLightningModuleWithTwoBackbones
+from models_with_two_separate_backbones.densnet_with_two_separate_backbones import (
+    DenseLightningModuleWithTwoBackbones,
+)
+from models_with_two_separate_backbones.efficientnet_with_two_separate_backbones import (
+    EfficientNetLightningModuleWithTwoBackbones,
+)
+from models_with_two_separate_backbones.resnet_with_two_separate_backbones import (
+    ResnetLightningModuleWithTwoBackbones,
+)
 
 
 from run_experiments import run_experiments_for_models_with_two_separate_backbones

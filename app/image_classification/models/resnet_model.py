@@ -23,7 +23,7 @@ class ResnetImageClassificationLightningModule(ImageClassificationLightningModul
     ):
 
         backbone = self._initialize_backbone(
-            backbone_fun, kwargs, num_classes, in_channels, False
+            backbone_fun, kwargs, num_classes, in_channels, True
         )
 
         super().__init__(backbone, get_x_method, num_classes)
