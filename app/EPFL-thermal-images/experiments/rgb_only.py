@@ -6,10 +6,10 @@ experiment_utils_module_path = abspath(
 )
 sys.path.append(experiment_utils_module_path)
 
-experiment_utils_module_path = abspath(
+image_classification_module_path = abspath(
     join(dirname(relpath(__file__)), "..", "..", "image_classification")
 )
-sys.path.append(experiment_utils_module_path)
+sys.path.append(image_classification_module_path)
 
 from models.resnet_model import ResnetImageClassificationLightningModule
 from models.densenet_model import DensenetImageClassificationLightningModule

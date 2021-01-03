@@ -32,8 +32,8 @@ class ResnetLightningModuleWithTwoBackbones(ImageClassificationLightningModule):
 
     def forward(self, x):
         rgb_batch, infrared_batch = x
-        rgb_latent_space = self.model_rgb(rgb_batch)
-        nir_latent_space = self.model_infrared(infrared_batch)
+        rgb_latent_space = self.backbone_rgb(rgb_batch)
+        nir_latent_space = self.backbone_infrared(infrared_batch)
 
         combined_latent_representation = cat(
             (

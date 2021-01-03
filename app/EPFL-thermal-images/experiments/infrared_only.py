@@ -29,7 +29,7 @@ store_preds_path = abspath(
 )
 
 project_name = PROJECT_NAME
-experiment_type = "rgb_only"
+experiment_type = "infrared_only"
 
 num_classes = 9
 in_channels = 3

@@ -14,7 +14,7 @@ from pytorch_lightning.loggers import WandbLogger
 from predict import predict
 
 
-MAX_EPOCHS = 30
+MAX_EPOCHS = 50
 
 
 def run_experiment(
@@ -113,7 +113,7 @@ def run_experiments_for_models_with_two_separate_backbones(
                 backbone_rgb, backbone_infrared, get_x_method, num_classes
             )
 
-            preds = run_experiment(model, dm, seed, get_x_method, logger)
+            preds = run_experiment(model, dm, seed, get_x_method, logger, num_classes)
             predictions_for_seeds.append(preds)
 
         save_preds_path = join(store_preds_path, f"{model_name}.pt")

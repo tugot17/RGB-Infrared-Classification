@@ -4,7 +4,7 @@ from os.path import join, relpath, dirname
 upper_dir = join(dirname(relpath(__file__)), "..")
 sys.path.append(upper_dir)
 
-import torch.functional as F
+import torch.nn.functional as F
 from torch import nn, cat
 from base_model import ImageClassificationLightningModule
 from typing import Callable

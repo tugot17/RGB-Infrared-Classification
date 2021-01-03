@@ -6,24 +6,23 @@ experiment_utils_module_path = abspath(
 )
 sys.path.append(experiment_utils_module_path)
 
-experiment_utils_module_path = abspath(
-    join(dirname(relpath(__file__)), "..", "..", "image_classification")
-)
-sys.path.append(experiment_utils_module_path)
-
-from models_with_two_separate_backbones.densnet_with_two_separate_backbones import DenseLightningModuleWithTwoBackbones
-from models_with_two_separate_backbones.efficientnet_with_two_separate_backbones import EfficientNetLightningModuleWithTwoBackbones
-from models_with_two_separate_backbones.resnet_with_two_separate_backbones import ResnetLightningModuleWithTwoBackbones
-
 from models_configurations import (
     densnet_configurations,
     efficientnet_configurations,
     resnet_configurations,
 )
 
+image_classification_module_path = abspath(
+    join(dirname(relpath(__file__)), "..", "..", "image_classification")
+)
+sys.path.append(image_classification_module_path)
+
+from models_with_two_separate_backbones.densnet_with_two_separate_backbones import DenseLightningModuleWithTwoBackbones
+from models_with_two_separate_backbones.efficientnet_with_two_separate_backbones import EfficientNetLightningModuleWithTwoBackbones
+from models_with_two_separate_backbones.resnet_with_two_separate_backbones import ResnetLightningModuleWithTwoBackbones
+
 
 from run_experiments import run_experiments_for_models_with_two_separate_backbones
-from models_configurations import models_configurations
 from seeds import seeds
 from epfl_utils import PROJECT_NAME, datamodule
 from copy import deepcopy
@@ -46,17 +45,6 @@ def get_x_method(batch):
 project_name = PROJECT_NAME
 experiment_type = "rgb_infrared_as_two_separate_inputs"
 
-
-def remove_activation_from_last_layer(inputs):
-    backbone_fun, kwargs, experiment_name = inputs
-    del kwargs["activation"]
-    return backbone_fun, kwargs, experiment_name
-
-
-updated_models_configurations = deepcopy(models_configurations)
-updated_models_configurations = list(
-    map(remove_activation_from_last_layer, updated_models_configurations)
-)
 
 num_classes = 9
 
