@@ -54,6 +54,7 @@ def run_experiments_for_models(
     get_x_method,
     num_classes,
     in_channels,
+    first_layer_pretrained,
     store_preds_path,
     project_name,
     experiment_type,
@@ -70,7 +71,7 @@ def run_experiments_for_models(
             )
 
             model = model_init_fun(
-                backbone_fun, kwargs, get_x_method, num_classes, in_channels
+                backbone_fun, kwargs, get_x_method, num_classes, in_channels, first_layer_pretrained
             )
 
             preds = run_experiment(model, dm, seed, get_x_method, logger, num_classes)

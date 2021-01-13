@@ -42,48 +42,55 @@ def get_x_method(batch):
 def run_rgb_infrared_combined_experiments():
     reset_init_fun = ResnetImageClassificationLightningModule
 
-    run_experiments_for_models(
-        reset_init_fun,
-        resnet_configurations,
-        datamodule,
-        seeds,
-        get_x_method,
-        num_classes,
-        in_channels,
-        store_preds_path,
-        project_name,
-        experiment_type,
-    )
+    for first_layer_pretrained in [False, True]:
+        current_experiment_type = (experiment_type + "first_pretrained") if first_layer_pretrained else \
+            (experiment_type + "first_random")
 
-    densnet_init_fun = DensenetImageClassificationLightningModule
+        run_experiments_for_models(
+            reset_init_fun,
+            resnet_configurations,
+            datamodule,
+            seeds,
+            get_x_method,
+            num_classes,
+            in_channels,
+            first_layer_pretrained,
+            store_preds_path,
+            project_name,
+            current_experiment_type,
+        )
 
-    run_experiments_for_models(
-        densnet_init_fun,
-        densnet_configurations,
-        datamodule,
-        seeds,
-        get_x_method,
-        num_classes,
-        in_channels,
-        store_preds_path,
-        project_name,
-        experiment_type,
-    )
+        densnet_init_fun = DensenetImageClassificationLightningModule
 
-    efficientnet_init_fun = EfficientnetImageClassificationLightningModule
+        run_experiments_for_models(
+            densnet_init_fun,
+            densnet_configurations,
+            datamodule,
+            seeds,
+            get_x_method,
+            num_classes,
+            in_channels,
+            first_layer_pretrained,
+            store_preds_path,
+            project_name,
+            current_experiment_type,
+        )
 
-    run_experiments_for_models(
-        efficientnet_init_fun,
-        efficientnet_configurations,
-        datamodule,
-        seeds,
-        get_x_method,
-        num_classes,
-        in_channels,
-        store_preds_path,
-        project_name,
-        experiment_type,
-    )
+        efficientnet_init_fun = EfficientnetImageClassificationLightningModule
+
+        run_experiments_for_models(
+            efficientnet_init_fun,
+            efficientnet_configurations,
+            datamodule,
+            seeds,
+            get_x_method,
+            num_classes,
+            in_channels,
+            first_layer_pretrained,
+            store_preds_path,
+            project_name,
+            current_experiment_type,
+        )
 
 
 if __name__ == "__main__":

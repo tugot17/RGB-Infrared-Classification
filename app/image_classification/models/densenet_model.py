@@ -20,9 +20,10 @@ class DensenetImageClassificationLightningModule(ImageClassificationLightningMod
         get_x_method: Callable,
         num_classes: int,
         in_channels=3,
+        first_layer_pretrained=True
     ):
         backbone = self._initialize_backbone(
-            backbone_fun, kwargs, num_classes, in_channels, True
+            backbone_fun, kwargs, num_classes, in_channels, first_layer_pretrained
         )
 
         super().__init__(backbone, get_x_method, num_classes)

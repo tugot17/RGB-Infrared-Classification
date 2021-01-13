@@ -16,11 +16,11 @@ class EfficientnetImageClassificationLightningModule(
     lr = 1e-3
 
     def __init__(
-        self, backbone_fun, kwargs, get_x_method: Callable, num_classes, in_channels=3
+        self, backbone_fun, kwargs, get_x_method: Callable, num_classes, in_channels=3, first_layer_pretrained=True
     ):
 
         kwargs["num_classes"] = num_classes
-        backbone = self._initialize_backbone(backbone_fun, kwargs, True, in_channels)
+        backbone = self._initialize_backbone(backbone_fun, kwargs, first_layer_pretrained, in_channels)
 
         super().__init__(backbone, get_x_method, num_classes)
 

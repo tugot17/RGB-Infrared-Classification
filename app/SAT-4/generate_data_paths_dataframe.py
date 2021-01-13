@@ -1,10 +1,8 @@
 from os.path import join, relpath, dirname, abspath, basename
 import pandas as pd
 import argparse
-from sklearn.model_selection import train_test_split
 import scipy.io
 
-from glob import glob
 
 DEFAULT_SAT_4_PATH = abspath(
     join(
@@ -45,8 +43,8 @@ def main(sat_4_full_mat_path, images_save_dir_path):
         labels = []
 
         for idx in tqdm(range(mat[f"{stage}_x"].shape[-1])):
-            rgb_save_path = abspath(relpath(join(images_save_dir_path, stage, "rgb", f"{idx}.png")))
-            nir_path_rgb = abspath(relpath(join(images_save_dir_path, stage, "infrared", f"{idx}.png")))
+            rgb_save_path = abspath(join(images_save_dir_path, stage, "rgb", f"{idx}.png"))
+            nir_path_rgb = abspath(join(images_save_dir_path, stage, "infrared", f"{idx}.png"))
 
             rgb = mat[f"{stage}_x"][:, :, :3, idx]
             rgb = Image.fromarray(rgb)
