@@ -43,8 +43,8 @@ def run_rgb_infrared_combined_experiments():
     reset_init_fun = ResnetImageClassificationLightningModule
 
     for first_layer_pretrained in [False, True]:
-        current_experiment_type = (experiment_type + "first_pretrained") if first_layer_pretrained else \
-            (experiment_type + "first_random")
+        current_experiment_type = (experiment_type + "_first_pretrained") if first_layer_pretrained else \
+            (experiment_type + "_first_random")
 
         run_experiments_for_models(
             reset_init_fun,
