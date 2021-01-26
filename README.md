@@ -1,4 +1,4 @@
-[![GitHub last commit](https://img.shields.io/github/last-commit/tugot17/RGB-Infrared-Classification/)](https://github.com/tugot17/RGB-Infrared-Classification/)
+[![GitHub last commit](https://img.shields.io/github/last-commit/tugot17/RGB-Infrared-Classification)](https://github.com/tugot17/RGB-Infrared-Classification)
 
 
 # RGB-Infrared image classification
