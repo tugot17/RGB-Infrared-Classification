@@ -54,10 +54,10 @@ def run_experiments_for_models(
     get_x_method,
     num_classes,
     in_channels,
-    first_layer_pretrained,
     store_preds_path,
     project_name,
     experiment_type,
+    first_layer_pretrained=False,
 ):
     for backbone_fun, kwargs, model_name in models_configurations:
 
