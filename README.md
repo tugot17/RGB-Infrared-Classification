@@ -4,7 +4,7 @@
 # RGB-Infrared image classification
 Code for research on the problem of applying transfer-learning for pairs of RGB-Infrared images in image problem
 
-<img src="assets/mfdataset.png" alt="drawing" width="70%"/>
+<img src="assets/epfl_classification.png" alt="drawing" width="70%"/>
 
 We investigate which of 5 approaches works best for a selected set of architectures and datasett
 
