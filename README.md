@@ -10,7 +10,7 @@ We investigate which of 5 approaches works best for a selected set of architectu
 
 ## Datasets
 
-The research was conducted on three data sets
+The research was conducted on two data sets
 
 * [EPFL RGB NIR Dataset](data/EPFL-thermal-images)
 
@@ -41,7 +41,7 @@ If u want to execute something on python scripts level you can access the contai
 docker exec -it rgb-infared-classificaton bash
 ```
 
-where `data-science-project` is the contrainer name
+where `rgb-infared-classificaton` is the contrainer name
 
 ## Authors
 * [Piotr Mazurek](https://github.com/tugot17)
