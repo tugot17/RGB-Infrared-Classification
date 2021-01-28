@@ -1,3 +1,14 @@
+from epfl_utils import PROJECT_NAME, datamodule
+from seeds import seeds
+from models_configurations import (
+    resnet_configurations,
+    densnet_configurations,
+    efficientnet_configurations,
+)
+from run_experiments import run_experiments_for_models
+from models.efficientnet_model import EfficientnetImageClassificationLightningModule
+from models.densenet_model import DensenetImageClassificationLightningModule
+from models.resnet_model import ResnetImageClassificationLightningModule
 import sys
 from os.path import abspath, relpath, dirname, join
 
@@ -11,18 +22,6 @@ experiment_utils_module_path = abspath(
 )
 sys.path.append(experiment_utils_module_path)
 
-from models.resnet_model import ResnetImageClassificationLightningModule
-from models.densenet_model import DensenetImageClassificationLightningModule
-from models.efficientnet_model import EfficientnetImageClassificationLightningModule
-
-from run_experiments import run_experiments_for_models
-from models_configurations import (
-    resnet_configurations,
-    densnet_configurations,
-    efficientnet_configurations,
-)
-from seeds import seeds
-from epfl_utils import PROJECT_NAME, datamodule
 
 store_preds_path = abspath(
     join(dirname(relpath(__file__)), "..", "results", "rgb_infrared_combined")
@@ -43,8 +42,11 @@ def run_rgb_infrared_combined_experiments():
     reset_init_fun = ResnetImageClassificationLightningModule
 
     for first_layer_pretrained in [False, True]:
-        current_experiment_type = (experiment_type + "_first_pretrained") if first_layer_pretrained else \
-            (experiment_type + "_first_random")
+        current_experiment_type = (
+            experiment_type +
+            "_first_pretrained") if first_layer_pretrained else (
+            experiment_type +
+            "_first_random")
 
         run_experiments_for_models(
             reset_init_fun,

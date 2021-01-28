@@ -1,3 +1,18 @@
+from copy import deepcopy
+from epfl_utils import PROJECT_NAME, datamodule
+from seeds import seeds
+from run_experiments import run_experiments_for_models_with_two_separate_backbones
+from models_with_two_separate_backbones.resnet_with_two_separate_backbones import (
+    ResnetLightningModuleWithTwoBackbones, )
+from models_with_two_separate_backbones.efficientnet_with_two_separate_backbones import (
+    EfficientNetLightningModuleWithTwoBackbones, )
+from models_with_two_separate_backbones.densnet_with_two_separate_backbones import (
+    DenseLightningModuleWithTwoBackbones, )
+from models_configurations import (
+    densnet_configurations,
+    efficientnet_configurations,
+    resnet_configurations,
+)
 import sys
 from os.path import abspath, relpath, dirname, join
 
@@ -6,32 +21,11 @@ experiment_utils_module_path = abspath(
 )
 sys.path.append(experiment_utils_module_path)
 
-from models_configurations import (
-    densnet_configurations,
-    efficientnet_configurations,
-    resnet_configurations,
-)
 
 image_classification_module_path = abspath(
     join(dirname(relpath(__file__)), "..", "..", "image_classification")
 )
 sys.path.append(image_classification_module_path)
-
-from models_with_two_separate_backbones.densnet_with_two_separate_backbones import (
-    DenseLightningModuleWithTwoBackbones,
-)
-from models_with_two_separate_backbones.efficientnet_with_two_separate_backbones import (
-    EfficientNetLightningModuleWithTwoBackbones,
-)
-from models_with_two_separate_backbones.resnet_with_two_separate_backbones import (
-    ResnetLightningModuleWithTwoBackbones,
-)
-
-
-from run_experiments import run_experiments_for_models_with_two_separate_backbones
-from seeds import seeds
-from epfl_utils import PROJECT_NAME, datamodule
-from copy import deepcopy
 
 
 store_preds_path = abspath(

@@ -1,3 +1,6 @@
+from typing import Callable
+from base_model import ImageClassificationLightningModule
+from torch import nn
 import sys
 from os.path import abspath, relpath, dirname, join
 
@@ -5,12 +8,9 @@ upper_dir = abspath(join(dirname(relpath(__file__)), ".."))
 
 sys.path.append(upper_dir)
 
-from torch import nn
-from base_model import ImageClassificationLightningModule
-from typing import Callable
 
-
-class DensenetImageClassificationLightningModule(ImageClassificationLightningModule):
+class DensenetImageClassificationLightningModule(
+        ImageClassificationLightningModule):
     lr = 1e-3
 
     def __init__(
@@ -23,8 +23,11 @@ class DensenetImageClassificationLightningModule(ImageClassificationLightningMod
         first_layer_pretrained=True
     ):
         backbone = self._initialize_backbone(
-            backbone_fun, kwargs, num_classes, in_channels, first_layer_pretrained
-        )
+            backbone_fun,
+            kwargs,
+            num_classes,
+            in_channels,
+            first_layer_pretrained)
 
         super().__init__(backbone, get_x_method, num_classes)
 
