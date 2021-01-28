@@ -1,13 +1,12 @@
+from typing import Callable
+from base_model import ImageClassificationLightningModule
+from efficientnet_pytorch.utils import Conv2dStaticSamePadding
 import sys
 from os.path import abspath, relpath, dirname, join
 
 upper_dir = abspath(join(dirname(relpath(__file__)), ".."))
 
 sys.path.append(upper_dir)
-
-from efficientnet_pytorch.utils import Conv2dStaticSamePadding
-from base_model import ImageClassificationLightningModule
-from typing import Callable
 
 
 class EfficientnetImageClassificationLightningModule(
@@ -16,11 +15,17 @@ class EfficientnetImageClassificationLightningModule(
     lr = 1e-3
 
     def __init__(
-        self, backbone_fun, kwargs, get_x_method: Callable, num_classes, in_channels=3, first_layer_pretrained=True
-    ):
+            self,
+            backbone_fun,
+            kwargs,
+            get_x_method: Callable,
+            num_classes,
+            in_channels=3,
+            first_layer_pretrained=True):
 
         kwargs["num_classes"] = num_classes
-        backbone = self._initialize_backbone(backbone_fun, kwargs, first_layer_pretrained, in_channels)
+        backbone = self._initialize_backbone(
+            backbone_fun, kwargs, first_layer_pretrained, in_channels)
 
         super().__init__(backbone, get_x_method, num_classes)
 
